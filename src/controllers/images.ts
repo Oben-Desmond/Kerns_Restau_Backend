@@ -20,7 +20,7 @@ export class ImagesController {
         try {
             const image = await Image.findByPk(req.params.id);
             if (!image) {
-                return res.status(404).json({ msg: 'Image not found' });
+                return res.status(404).json({ message: 'Image not found' });
             }
             res.json(image);
         } catch (err: any) {
@@ -45,7 +45,7 @@ export class ImagesController {
         try {
             const image = await Image.findByPk(req.params.id);
             if (!image) {
-                return res.status(404).json({ msg: 'Image not found' });
+                return res.status(404).json({ message: 'Image not found' });
             }
             await image.update(req.body);
             res.json(image);
@@ -60,10 +60,10 @@ export class ImagesController {
         try {
             const image = await Image.findByPk(req.params.id);
             if (!image) {
-                return res.status(404).json({ msg: 'Image not found' });
+                return res.status(404).json({ message: 'Image not found' });
             }
             await image.destroy();
-            res.json({ msg: 'Image removed' });
+            res.json({ message: 'Image removed' });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');

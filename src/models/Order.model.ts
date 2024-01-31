@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../configs/db";
+import { sequelize } from "../config/db";
 
 
 const Order = sequelize.define('Order', {
@@ -31,7 +31,8 @@ const Order = sequelize.define('Order', {
     },
     menu_items: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false
+        allowNull: false,
+        default: []
     }
 
 });

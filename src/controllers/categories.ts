@@ -10,7 +10,7 @@ class CategoryController {
     static getCategories = async (req: Request, res: Response) => {
         try {
             const categories = await Category.findAll();
-            res.json(categories);
+            res.json({ data: categories, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -22,9 +22,9 @@ class CategoryController {
         try {
             const category = await Category.findByPk(req.params.id);
             if (!category) {
-                return res.status(404).json({ msg: 'Category not found' });
+                return res.status(404).json({ message: 'Category not found', success: false });
             }
-            res.json(category);
+            res.json({ data: category, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -35,7 +35,7 @@ class CategoryController {
     static createCategory = async (req: Request, res: Response) => {
         try {
             const category = await Category.create(req.body);
-            res.json(category);
+            res.json({ data: category, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -47,10 +47,10 @@ class CategoryController {
         try {
             const category = await Category.findByPk(req.params.id);
             if (!category) {
-                return res.status(404).json({ msg: 'Category not found' });
+                return res.status(404).json({ message: 'Category not found' });
             }
             await category.update(req.body);
-            res.json(category);
+            res.json({ data: category, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -63,10 +63,10 @@ class CategoryController {
         try {
             const category = await Category.findByPk(req.params.id);
             if (!category) {
-                return res.status(404).json({ msg: 'Category not found' });
+                return res.status(404).json({ message: 'Category not found', success: false })
             }
             await category.destroy();
-            res.json({ msg: 'Category removed' });
+            res.json({ message: 'Category removed', success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');

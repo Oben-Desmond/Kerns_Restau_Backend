@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../configs/db";
+import { sequelize } from "../config/db";
 
 
 const Category = sequelize.define('Category', {

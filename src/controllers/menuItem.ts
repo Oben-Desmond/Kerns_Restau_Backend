@@ -8,7 +8,7 @@ export class MenuItemController {
     static getMenuItems = async (req: Request, res: Response) => {
         try {
             const menuItems = await MenuItem.findAll();
-            res.json(menuItems);
+            res.json({ data: menuItems, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -20,9 +20,9 @@ export class MenuItemController {
         try {
             const menuItem = await MenuItem.findByPk(req.params.id);
             if (!menuItem) {
-                return res.status(404).json({ msg: 'MenuItem not found' });
+                return res.status(404).json({ message: 'MenuItem not found', success: false });
             }
-            res.json(menuItem);
+            res.json({ data: menuItem, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -33,7 +33,7 @@ export class MenuItemController {
     static createMenuItem = async (req: Request, res: Response) => {
         try {
             const menuItem = await MenuItem.create(req.body);
-            res.json(menuItem);
+            res.json({ data: menuItem, success: false });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -45,7 +45,7 @@ export class MenuItemController {
         try {
             const menuItem = await MenuItem.findByPk(req.params.id);
             if (!menuItem) {
-                return res.status(404).json({ msg: 'MenuItem not found' });
+                return res.status(404).json({ message: 'MenuItem not found', success: false });
             }
             await menuItem.update(req.body);
             res.json(menuItem);
@@ -60,10 +60,10 @@ export class MenuItemController {
         try {
             const menuItem = await MenuItem.findByPk(req.params.id);
             if (!menuItem) {
-                return res.status(404).json({ msg: 'MenuItem not found' });
+                return res.status(404).json({ message: 'MenuItem not found', success: false });
             }
             await menuItem.destroy();
-            res.json({ msg: 'MenuItem removed' });
+            res.json({ message: 'MenuItem removed', success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');

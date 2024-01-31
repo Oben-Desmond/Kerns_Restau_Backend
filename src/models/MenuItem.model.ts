@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize"
-import { sequelize } from "../configs/db"
+import { sequelize } from "../config/db"
 
 const MenuItem = sequelize.define('MenuItem', {
     name: {

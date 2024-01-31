@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "djymgqym",
+    "password": "7y6K3Z70FM4vkle-3KPSbHd6DQ1mZOpF",
+    "database": "djymgqym",
+    "host": "kandula.db.elephantsql.com",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "djymgqym",
+    "password": "7y6K3Z70FM4vkle-3KPSbHd6DQ1mZOpF",
+    "database": "djymgqym",
+    "host": "kandula.db.elephantsql.com",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "djymgqym",
+    "password": "7y6K3Z70FM4vkle-3KPSbHd6DQ1mZOpF",
+    "database": "djymgqym",
+    "host": "kandula.db.elephantsql.com",
+    "dialect": "postgres"
+  }
+}

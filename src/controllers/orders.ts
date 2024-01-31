@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Order from "../models/Order.model";
+import { OrderService } from "../services/orders.service";
 
 
 //orders controller
@@ -9,7 +10,13 @@ export class OrdersController {
     static getOrders = async (req: Request, res: Response) => {
         try {
             const orders = await Order.findAll();
-            res.json(orders);
+            const menuItems = await OrderService.getMenuItems(orders)
+            console.warn(menuItems)
+            const orderJson = [
+
+                ...menuItems
+            ]
+            res.json({ data: orderJson, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -21,9 +28,9 @@ export class OrdersController {
         try {
             const order = await Order.findByPk(req.params.id);
             if (!order) {
-                return res.status(404).json({ msg: 'Order not found' });
+                return res.status(404).json({ message: 'Order not found', success: false });
             }
-            res.json(order);
+            res.json({ data: order, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -34,7 +41,7 @@ export class OrdersController {
     static createOrder = async (req: Request, res: Response) => {
         try {
             const order = await Order.create(req.body);
-            res.json(order);
+            res.send({ data: order, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -46,10 +53,10 @@ export class OrdersController {
         try {
             const order = await Order.findByPk(req.params.id);
             if (!order) {
-                return res.status(404).json({ msg: 'Order not found' });
+                return res.status(404).json({ message: 'Order not found', success: false });
             }
             await order.update(req.body);
-            res.json(order);
+            res.json({ data: order, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -61,10 +68,10 @@ export class OrdersController {
         try {
             const order = await Order.findByPk(req.params.id);
             if (!order) {
-                return res.status(404).json({ msg: 'Order not found' });
+                return res.status(404).json({ message: 'Order not found', success: false });
             }
             await order.destroy();
-            res.json({ msg: 'Order removed' });
+            res.json({ message: 'Order removed', success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');

@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import "./src/configs/db"
+import "./src/config/db"
 import catRouter from "./src/routes/categories.routes"
 import orderRouter from "./src/routes/orders.routes"
 import menuItemRouter from "./src/routes/menuitems.routes"
@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 app.use(`/api/v${VERSION_NUMBER}/categories`, catRouter);
 app.use(`/api/v${VERSION_NUMBER}/orders`, orderRouter);
 app.use(`/api/v${VERSION_NUMBER}/menu-items`, menuItemRouter);
+
 // app.use(`/`, (req, res) => res.send("Server running :) " + VERSION_NUMBER));
 
 
