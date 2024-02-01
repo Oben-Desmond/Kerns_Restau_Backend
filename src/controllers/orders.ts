@@ -10,12 +10,7 @@ export class OrdersController {
     static getOrders = async (req: Request, res: Response) => {
         try {
             const orders = await Order.findAll();
-            const ordersWithMenuItems = await OrderService.getMenuItems(orders)
-            const orderJson = [
-
-                ...ordersWithMenuItems
-            ]
-            res.json({ data: orderJson, success: true });
+            res.json({ data: orders, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -30,11 +25,8 @@ export class OrdersController {
             if (!order) {
                 return res.status(404).json({ message: 'Order not found', success: false });
             }
-            const ordersWithMenuItems = await OrderService.getMenuItems([order])
-            const orderJson = [
-                ...ordersWithMenuItems
-            ][0]
-            res.json({ data: orderJson, success: true });
+
+            res.json({ data: order, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
