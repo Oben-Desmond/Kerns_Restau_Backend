@@ -10,11 +10,10 @@ export class OrdersController {
     static getOrders = async (req: Request, res: Response) => {
         try {
             const orders = await Order.findAll();
-            const menuItems = await OrderService.getMenuItems(orders)
-            console.warn(menuItems)
+            const ordersWithMenuItems = await OrderService.getMenuItems(orders)
             const orderJson = [
 
-                ...menuItems
+                ...ordersWithMenuItems
             ]
             res.json({ data: orderJson, success: true });
         } catch (err: any) {
@@ -27,10 +26,15 @@ export class OrdersController {
     static getOrderById = async (req: Request, res: Response) => {
         try {
             const order = await Order.findByPk(req.params.id);
+
             if (!order) {
                 return res.status(404).json({ message: 'Order not found', success: false });
             }
-            res.json({ data: order, success: true });
+            const ordersWithMenuItems = await OrderService.getMenuItems([order])
+            const orderJson = [
+                ...ordersWithMenuItems
+            ][0]
+            res.json({ data: orderJson, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');

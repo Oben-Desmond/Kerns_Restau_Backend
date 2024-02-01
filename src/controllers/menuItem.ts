@@ -33,7 +33,7 @@ export class MenuItemController {
     static createMenuItem = async (req: Request, res: Response) => {
         try {
             const menuItem = await MenuItem.create(req.body);
-            res.json({ data: menuItem, success: false });
+            res.json({ data: menuItem, success: true });
         } catch (err: any) {
             console.error(err.message);
             res.status(500).send('Server Error');
