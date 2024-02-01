@@ -7,6 +7,7 @@ export interface IMenuItem {
     isAvailable: boolean;
     id: number;
     images: string[];
+    quantity?: number;
 }
 
 
@@ -33,6 +34,6 @@ export interface IOrderRequest {
     kitchen_status: string;
     finance_status: string;
     customer_name: string;
-    menu_items: string[];
+    menu_items: IMenuItem[];
 }
 

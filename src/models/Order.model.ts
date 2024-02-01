@@ -30,9 +30,9 @@ const Order = sequelize.define('Order', {
         allowNull: false
     },
     menu_items: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.ARRAY(DataTypes.JSONB), // Use JSONB for efficiency
         allowNull: false,
-        default: []
+        default: [],
     }
 
 });
