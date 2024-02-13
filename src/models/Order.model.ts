@@ -25,10 +25,6 @@ const Order = sequelize.define('Order', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    customer_name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     menu_items: {
         type: DataTypes.ARRAY(DataTypes.JSONB), // Use JSONB for efficiency
         allowNull: false,
