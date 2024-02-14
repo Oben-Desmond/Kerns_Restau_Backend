@@ -23,6 +23,20 @@ export interface IDrinkItem {
   quantity?: number;
 }
 
+export interface IIventoryItem {
+  name: string;
+  brand: string;
+  category: string;
+  expiration_date: string;
+  unit_of_measurement: string;
+  quantity: number;
+  upper_quantity_bound: number;
+  lower_quantity_bound: number;
+  supplier?: string;
+  description: string;
+  images: string[];
+}
+
 export interface ICategory {
   name: string;
   id: number;
