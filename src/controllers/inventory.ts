@@ -3,7 +3,7 @@ import InventoryItem from "../models/IventoryItem.model";
 
 export class InventoryItemController {
   //get all inventoryItem
-  static getMenuItems = async (req: Request, res: Response) => {
+  static getInventoryItems = async (req: Request, res: Response) => {
     try {
       const iventoryItems = await InventoryItem.findAll();
       res.json({ data: iventoryItems, success: true });
