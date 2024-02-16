@@ -8,6 +8,7 @@ import orderRouter from "./src/routes/orders.routes";
 import menuItemRouter from "./src/routes/menuitems.routes";
 import drinkRouter from "./src/routes/drink.routes";
 import inventoryRouter from "./src/routes/inventory.routes";
+import rentalRouter from "./src/routes/rental.routes";
 
 const app = express();
 const port = 5000;
@@ -34,6 +35,7 @@ app.use(`/api/v${VERSION_NUMBER}/orders`, orderRouter);
 app.use(`/api/v${VERSION_NUMBER}/menu-items`, menuItemRouter);
 app.use(`/api/v${VERSION_NUMBER}/drinks`, drinkRouter);
 app.use(`/api/v${VERSION_NUMBER}/inventory-items`, inventoryRouter);
+app.use(`/api/v${VERSION_NUMBER}/rentals`, rentalRouter);
 
 // app.use(`/`, (req, res) => res.send("Server running :) " + VERSION_NUMBER));
 
