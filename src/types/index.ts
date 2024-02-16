@@ -61,3 +61,15 @@ export interface IOrderRequest {
   customer_name: string;
   menu_items: IMenuItem[];
 }
+
+export interface IRentalItem {
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  info: string;
+  id: number;
+  images: string[];
+  quantity: number;
+  isAvailable: boolean;
+}

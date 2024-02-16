@@ -18,7 +18,7 @@ const IventoryItem = sequelize.define("IventoryItem", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  unique_of_measurement: {
+  unit_of_measurement: {
     type: DataTypes.STRING,
     allowNull: false,
   },

@@ -26,6 +26,10 @@ const RentalItem = sequelize.define("RentalItem", {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
+  isAvailable: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+  },
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
