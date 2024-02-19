@@ -10,6 +10,7 @@ import drinkRouter from "./src/routes/drink.routes";
 import inventoryRouter from "./src/routes/inventory.routes";
 import rentalRouter from "./src/routes/rental.routes";
 import purchaseOrderRouter from "./src/routes/purchaseOrder.routes";
+import rentalOrderRouter from "./src/routes/rentalOrders.routes";
 
 const app = express();
 const port = 5000;
@@ -38,6 +39,7 @@ app.use(`/api/v${VERSION_NUMBER}/drinks`, drinkRouter);
 app.use(`/api/v${VERSION_NUMBER}/inventory-items`, inventoryRouter);
 app.use(`/api/v${VERSION_NUMBER}/rentals`, rentalRouter);
 app.use(`/api/v${VERSION_NUMBER}/purchase-orders`, purchaseOrderRouter);
+app.use(`/api/v${VERSION_NUMBER}/rental-orders`, rentalOrderRouter);
 
 // app.use(`/`, (req, res) => res.send("Server running :) " + VERSION_NUMBER));
 

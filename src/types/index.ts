@@ -38,6 +38,7 @@ export interface IIventoryItem {
 }
 
 export interface IPurchaseOrder {
+  id: string;
   item_name: string;
   item_id: string;
   supplier: string;
@@ -81,4 +82,16 @@ export interface IRentalItem {
   images: string[];
   quantity: number;
   isAvailable: boolean;
+}
+
+export interface IRentalOrder {
+  id: number;
+  customer_name: string;
+  customer_id: number;
+  total: number;
+  rental_status: "still out" | "returned";
+  finance_status: "paid" | "pending";
+  rental_date: string;
+  return_date: string;
+  rental_items: IRentalItem[];
 }
