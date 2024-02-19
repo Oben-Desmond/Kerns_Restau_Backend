@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/User.model";
+import * as bcryptjs from "bcryptjs";
 
 export class AuthController {
   /**
@@ -10,7 +11,11 @@ export class AuthController {
    */
   static createUser = async (req: Request, res: Response) => {
     try {
-      const user = await User.create(req.body);
+      let userObject = req.body;
+
+      const hashPassword = await bcryptjs.hash(userObject.password, 10);
+      userObject = { ...userObject, password: hashPassword };
+      const user = await User.create(userObject);
       res.json({
         message: "Account created successfully!",
         success: true,
@@ -30,14 +35,22 @@ export class AuthController {
   static login = async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
+
       const user = await User.findOne({ email: email });
 
       if (!user) {
         return res.status(404).send("Account not found!");
       }
 
-      if (user.password !== password) {
+      // Check if password is corrent
+      const passwordCheck = await bcryptjs.compare(password, user.password);
+
+      if (!passwordCheck) {
         return res.status(403).send("Invalid Credentials!");
+      }
+
+      if (user.status === "disabled") {
+        return res.status(403).send("Account has been DISABLED!");
       }
 
       res.status(200).json({
