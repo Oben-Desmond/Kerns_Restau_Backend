@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import InventoryItem from "../models/IventoryItem.model";
+import InventoryItem from "../models/InventoryItem.model";
 
 export class InventoryItemController {
   //get all inventoryItem

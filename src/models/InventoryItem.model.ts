@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
 
-const IventoryItem = sequelize.define("IventoryItem", {
+const InventoryItem = sequelize.define("InventoryItem", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -34,6 +34,10 @@ const IventoryItem = sequelize.define("IventoryItem", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  expiration_date: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -46,8 +50,8 @@ const IventoryItem = sequelize.define("IventoryItem", {
   },
 });
 
-IventoryItem.sync({
+InventoryItem.sync({
   alter: true,
 });
 
-export default IventoryItem;
+export default InventoryItem;
