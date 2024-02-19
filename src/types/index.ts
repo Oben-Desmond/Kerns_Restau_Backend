@@ -109,3 +109,9 @@ export interface IUser {
 }
 
 // Table for user logs
+export interface IUserLogTable {
+  id: string;
+  description: string;
+  category: "auth" | "mutation";
+  user: IUser;
+}
