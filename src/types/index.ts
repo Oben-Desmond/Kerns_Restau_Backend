@@ -37,6 +37,15 @@ export interface IIventoryItem {
   images: string[];
 }
 
+export interface IPurchaseOrder {
+  item_name: string;
+  item_id: string;
+  supplier: string;
+  quantity: number;
+  purchase_cost: number;
+  purchase_date: string;
+}
+
 export interface ICategory {
   name: string;
   id: number;
