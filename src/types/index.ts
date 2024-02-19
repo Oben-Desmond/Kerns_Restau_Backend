@@ -95,3 +95,17 @@ export interface IRentalOrder {
   return_date: string;
   rental_items: IRentalItem[];
 }
+
+export interface IUser {
+  name: string;
+  phoneNumber: string;
+  password: string;
+  lastLogin: string;
+  //  jwt token refresh after 12AM everyday
+  joken: string;
+  role: "admin" | "waiter" | "finance" | "inventory" | "rental" | "kitchen";
+  id: number;
+  status: "active" | "disabled";
+}
+
+// Table for user logs

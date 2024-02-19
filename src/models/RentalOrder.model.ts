@@ -12,7 +12,7 @@ const RentalOrder = sequelize.define("RentalOrder", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  customer_id: {
+  customer_id_number: {
     type: DataTypes.STRING,
     allowNull: false,
   },

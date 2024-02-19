@@ -21,7 +21,9 @@ export class PurchaseOrderController {
   static getPurchaseOrderByItemId = async (req: Request, res: Response) => {
     try {
       const purchaseOrder = await PurchaseOrder.findAll({
-        item_id: req.params.id,
+        where: {
+          item_id: req.params.id,
+        },
       });
 
       if (!purchaseOrder) {
