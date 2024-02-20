@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
 
-const UserLog = sequelize.create("UserLog", {
+const UserLog = sequelize.define("UserLog", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,

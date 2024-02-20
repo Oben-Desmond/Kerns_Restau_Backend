@@ -32,6 +32,34 @@ export class RentalOrdersController {
     }
   };
 
+  /**
+   * Get purchase order of an particular Item passing item_id
+   */
+  static getRentalOrderByItemId = async (req: Request, res: Response) => {
+    try {
+      const rentalOrder = await RentalOrder.findAll({
+        where: {
+          item_id: req.params.id,
+        },
+      });
+
+      if (!rentalOrder) {
+        return res.status(404).json({
+          message: "Rental order not found",
+          success: false,
+        });
+      }
+
+      res.json({
+        data: rentalOrder,
+        success: true,
+      });
+    } catch (error: any) {
+      console.log(error.message);
+      res.status(500).send("Server error: " + error.message);
+    }
+  };
+
   //create rental Order
   static createRentalOrder = async (req: Request, res: Response) => {
     try {

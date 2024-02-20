@@ -8,6 +8,9 @@ router.get("/", RentalOrdersController.getRentalOrders);
 //get order by id
 router.get("/:id", RentalOrdersController.getRentalOrderById);
 
+//get order by id
+router.get("/item", RentalOrdersController.getRentalOrderByItemId);
+
 //create order
 router.post("/", RentalOrdersController.createRentalOrder);
 

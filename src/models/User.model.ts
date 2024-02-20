@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
 
-const User = sequelize.create("User", {
+const User = sequelize.define("User", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -22,7 +22,7 @@ const User = sequelize.create("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  joken: {
+  token: {
     type: DataTypes.STRING,
     allowNull: true,
   },
@@ -34,6 +34,7 @@ const User = sequelize.create("User", {
     type: DataTypes.INTEGER,
     allowNull: false,
     autoIncrement: true,
+    primaryKey: true,
   },
   status: {
     type: DataTypes.STRING,
