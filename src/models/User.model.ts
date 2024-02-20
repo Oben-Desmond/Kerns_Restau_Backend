@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
 
-const User = sequelize.create({
+const User = sequelize.create("User", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
