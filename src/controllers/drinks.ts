@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Drink from "../models/drink.model";
+import Drink from "../models/Drink.model";
 
 export class DrinkController {
   //get all drinks
