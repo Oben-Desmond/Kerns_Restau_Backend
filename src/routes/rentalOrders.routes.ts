@@ -1,23 +1,48 @@
 import express from "express";
 import { RentalOrdersController } from "../controllers/rentalOrders";
+import { restrictToRole } from "../services/authMiddleWare.service";
 const router = express.Router();
 
 //get all orders
-router.get("/", RentalOrdersController.getRentalOrders);
+router.get(
+  "/",
+  restrictToRole(["admin", "rental", "finance"]),
+  RentalOrdersController.getRentalOrders
+);
 
 //get order by id
-router.get("/:id", RentalOrdersController.getRentalOrderById);
+router.get(
+  "/:id",
+  restrictToRole(["admin", "rental", "finance"]),
+  RentalOrdersController.getRentalOrderById
+);
 
 //get order by id
-router.get("/item", RentalOrdersController.getRentalOrderByItemId);
+router.get(
+  "/item/:id",
+  restrictToRole(["admin", "rental", "finance"]),
+  RentalOrdersController.getRentalOrderByItemId
+);
 
 //create order
-router.post("/", RentalOrdersController.createRentalOrder);
+router.post(
+  "/",
+  restrictToRole(["admin", "rental", "finance"]),
+  RentalOrdersController.createRentalOrder
+);
 
 //update order
-router.put("/:id", RentalOrdersController.updateRentalOrder);
+router.put(
+  "/:id",
+  restrictToRole(["admin", "rental", "finance"]),
+  RentalOrdersController.updateRentalOrder
+);
 
 //delete order
-router.delete("/:id", RentalOrdersController.deleteRentalOrder);
+router.delete(
+  "/:id",
+  restrictToRole(["admin", "rental", "finance"]),
+  RentalOrdersController.deleteRentalOrder
+);
 
 export default router;

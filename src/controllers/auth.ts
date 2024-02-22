@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import User from "../models/User.model";
 import * as bcryptjs from "bcryptjs";
+import jwt from "jsonwebtoken";
 
+const JWT_SECRET = process.env.JWT_SECRET;
 export class AuthController {
   /**
    *  Create a new user
@@ -46,15 +48,29 @@ export class AuthController {
       const passwordCheck = await bcryptjs.compare(password, user.password);
 
       if (!passwordCheck) {
-        return res.status(403).send("Invalid Credentials!");
+        return res
+          .status(403)
+          .json({ message: "Invalid Credentials!", success: false });
       }
 
       if (user.status === "disabled") {
-        return res.status(403).send("Account has been DISABLED!");
+        return res
+          .status(403)
+          .json({ message: "Account has been DISABLED!", success: false });
       }
+
+      // Calculate the expiry time for the token until 11:59PM of the same login day
+      const expiryDate = new Date();
+      expiryDate.setHours(23, 59, 59, 999);
+
+      // Generate JWT token with user role included in payload
+      const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, {
+        expiresIn: Math.floor((expiryDate.getTime() - Date.now()) / 1000),
+      });
 
       res.status(200).json({
         data: user,
+        token: token,
         success: true,
       });
     } catch (error: any) {

@@ -87,7 +87,8 @@ export interface IRentalItem {
 export interface IRentalOrder {
   id: number;
   customer_name: string;
-  customer_id: number;
+  customer_id_number: number;
+  rental_agreement: string;
   total: number;
   rental_status: "still out" | "returned";
   finance_status: "paid" | "pending";
