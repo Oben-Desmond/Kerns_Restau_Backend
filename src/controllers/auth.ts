@@ -3,7 +3,6 @@ import User from "../models/User.model";
 import * as bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
 export class AuthController {
   /**
    *  Create a new user
@@ -35,6 +34,9 @@ export class AuthController {
    * @returns error in case of mismatch or user object if successful
    */
   static login = async (req: Request, res: Response) => {
+    const JWT_SECRET = process.env.JWT_SECRET!;
+
+    console.log("jwt secret:", JWT_SECRET);
     try {
       const { email, password } = req.body;
 
@@ -69,8 +71,7 @@ export class AuthController {
       });
 
       res.status(200).json({
-        data: user,
-        token: token,
+        data: { user, token },
         success: true,
       });
     } catch (error: any) {
