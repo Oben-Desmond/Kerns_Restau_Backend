@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
 
-const RentalItemLogs = sequelize.define("RentalItemLogs", {
+const InventoryItemLogs = sequelize.define("InventoryItemLogs", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -22,8 +22,8 @@ const RentalItemLogs = sequelize.define("RentalItemLogs", {
   },
 });
 
-RentalItemLogs.sync({
+InventoryItemLogs.sync({
   alter: true,
 });
 
-export default RentalItemLogs;
+export default InventoryItemLogs;
