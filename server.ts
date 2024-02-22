@@ -12,6 +12,9 @@ import rentalRouter from "./src/routes/rental.routes";
 import purchaseOrderRouter from "./src/routes/purchaseOrder.routes";
 import rentalOrderRouter from "./src/routes/rentalOrders.routes";
 import authRouter from "./src/routes/auth.routes";
+import userLogsRouter from "./src/routes/userLogs.routes";
+import inventoryLogsRouter from "./src/routes/inventoryLogs.routes";
+import rentalLogsRouter from "./src/routes/rentalLogs.routes";
 
 const app = express();
 const port = 5000;
@@ -42,6 +45,9 @@ app.use(`/api/v${VERSION_NUMBER}/rentals`, rentalRouter);
 app.use(`/api/v${VERSION_NUMBER}/purchase-orders`, purchaseOrderRouter);
 app.use(`/api/v${VERSION_NUMBER}/rental-orders`, rentalOrderRouter);
 app.use(`/api/v${VERSION_NUMBER}/auth`, authRouter);
+app.use(`/api/v${VERSION_NUMBER}/user-logs`, userLogsRouter);
+app.use(`/api/v${VERSION_NUMBER}/rental-logs`, rentalLogsRouter);
+app.use(`/api/v${VERSION_NUMBER}/inventory-logs`, inventoryLogsRouter);
 
 // app.use(`/`, (req, res) => res.send("Server running :) " + VERSION_NUMBER));
 

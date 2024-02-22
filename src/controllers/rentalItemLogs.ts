@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import InventoryItemLogs from "../models/InventoryLogs.model";
 import RentalItemLogs from "../models/rentalItemLogs.model";
 
-export class IventoryLogsController {
+export class RentalLogsController {
   /** Get all items logs */
   static getAllItemsLogs = async (req: Request, res: Response) => {
     try {
