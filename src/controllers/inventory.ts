@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import InventoryItem from "../models/InventoryItem.model";
+import logInventoryAction from "../services/inventoryLog.service";
 
 export class InventoryItemController {
   //get all inventoryItem
@@ -30,9 +31,22 @@ export class InventoryItemController {
   };
 
   //create InventoryItem
-  static createInventoryItem = async (req: Request, res: Response) => {
+  static createInventoryItem = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const inventoryItem = await InventoryItem.create(req.body);
+
+      const logInfo = {
+        itemName: inventoryItem.name,
+        itemId: inventoryItem.id,
+        description: `${inventoryItem.name} added to inventory`,
+      };
+
+      await logInventoryAction(req, res, logInfo);
+
       res.json({ data: inventoryItem, success: true });
     } catch (err: any) {
       console.error(err.message);
@@ -41,7 +55,11 @@ export class InventoryItemController {
   };
 
   //update InventoryItem
-  static updateInventoryItem = async (req: Request, res: Response) => {
+  static updateInventoryItem = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const inventoryItem = await InventoryItem.findByPk(req.params.id);
       if (!inventoryItem) {
@@ -50,15 +68,29 @@ export class InventoryItemController {
           .json({ message: "InventoryItem not found", success: false });
       }
       await inventoryItem.update(req.body);
+
+      const logInfo = {
+        itemName: inventoryItem.name,
+        itemId: inventoryItem.id,
+        description: `${inventoryItem.name} Updated!`,
+      };
+
+      await logInventoryAction(req, res, logInfo);
+
       res.json(inventoryItem);
     } catch (err: any) {
       console.error(err.message);
       res.status(500).send("Server Error");
+      next(err);
     }
   };
 
   //delete InventoryItem
-  static deleteInventoryItem = async (req: Request, res: Response) => {
+  static deleteInventoryItem = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const inventoryItem = await InventoryItem.findByPk(req.params.id);
       if (!inventoryItem) {
@@ -66,11 +98,23 @@ export class InventoryItemController {
           .status(404)
           .json({ message: "InventoryItem not found", success: false });
       }
+
+      const logInfo = {
+        itemName: inventoryItem.name,
+        itemId: inventoryItem.id,
+        description: `${inventoryItem.name} removed from inventory`,
+      };
+
+      await logInventoryAction(req, res, logInfo);
+
       await inventoryItem.destroy();
       res.json({ message: "InventoryItem removed", success: true });
+
+      next();
     } catch (err: any) {
       console.error(err.message);
       res.status(500).send("Server Error");
+      next(err);
     }
   };
 }
