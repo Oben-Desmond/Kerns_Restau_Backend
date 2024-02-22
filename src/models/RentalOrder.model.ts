@@ -43,6 +43,8 @@ const RentalOrder = sequelize.define("RentalOrder", {
   },
 });
 
-sequelize.sync();
+sequelize.sync({
+  alter: true,
+});
 
 export default RentalOrder;
