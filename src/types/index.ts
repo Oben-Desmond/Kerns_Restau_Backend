@@ -116,3 +116,14 @@ export interface IUserLogTable {
   category: "auth" | "mutation";
   user: IUser;
 }
+
+interface INotification {
+  id: string;
+  source: string;
+  destination: string;
+  message: string;
+  type: "order" | "menu" | "rental";
+  type_id: string;
+  titles: string;
+  is_read: string[];
+}

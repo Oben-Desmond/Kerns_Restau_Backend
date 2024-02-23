@@ -15,6 +15,7 @@ import authRouter from "./src/routes/auth.routes";
 import userLogsRouter from "./src/routes/userLogs.routes";
 import inventoryLogsRouter from "./src/routes/inventoryLogs.routes";
 import rentalLogsRouter from "./src/routes/rentalLogs.routes";
+import notificationRouter from "./src/routes/notification.routes";
 
 const app = express();
 const port = 5000;
@@ -48,6 +49,7 @@ app.use(`/api/v${VERSION_NUMBER}/auth`, authRouter);
 app.use(`/api/v${VERSION_NUMBER}/user-logs`, userLogsRouter);
 app.use(`/api/v${VERSION_NUMBER}/rental-logs`, rentalLogsRouter);
 app.use(`/api/v${VERSION_NUMBER}/inventory-logs`, inventoryLogsRouter);
+app.use(`/api/v${VERSION_NUMBER}/notifications`, notificationRouter);
 
 // app.use(`/`, (req, res) => res.send("Server running :) " + VERSION_NUMBER));
 
