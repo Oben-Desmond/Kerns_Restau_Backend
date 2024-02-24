@@ -1,9 +1,9 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
 
-const Notification = sequelize.define("Notifications", {
+const Notification = sequelize.define("Notification", {
   id: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
@@ -20,12 +20,12 @@ const Notification = sequelize.define("Notifications", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  type: {
+  notification_type: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  type_id: {
-    type: DataTypes.NUMBER,
+  type_id_number: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   title: {

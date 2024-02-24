@@ -20,10 +20,6 @@ const User = sequelize.define("User", {
   },
   last_login: {
     type: DataTypes.STRING,
-    allowNull: false,
-  },
-  token: {
-    type: DataTypes.STRING,
     allowNull: true,
   },
   role: {

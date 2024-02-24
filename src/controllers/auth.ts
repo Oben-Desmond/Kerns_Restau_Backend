@@ -74,9 +74,80 @@ export class AuthController {
         data: { user, token },
         success: true,
       });
+
+      user.update({ ...user, last_login: new Date() });
     } catch (error: any) {
       console.log(error.message);
       res.status(500).send(`Server error: ${error.message}`);
+    }
+  };
+
+  /**
+   * Get Users to get all users in the database
+   * @param req Request object
+   * @param res response object
+   * return the list of users, or an empty list
+   */
+  static getUsers = async (req: Request, res: Response) => {
+    try {
+      const users = await User.findAll();
+      res.json({
+        data: users,
+        success: true,
+      });
+    } catch (error: any) {
+      console.log(`Error: ${error}`);
+      res.status(500).json({ message: error, success: false });
+    }
+  };
+
+  /**
+   * updateUser, function to update user details
+   * @param req Request object
+   * @param res Response object
+   * @returns returns true if successfully, false otherwise
+   */
+  static updateUser = async (req: Request, res: Response) => {
+    try {
+      const user = await User.findByPk(req.params.id);
+
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: "User not found!", success: false });
+      }
+
+      user.update(req.body);
+      res.status(200).json({ message: "User updated!", success: true });
+    } catch (error: any) {
+      console.log(`Error Update:, ${error}`);
+      res.status(500).json({ message: `Error: ${error}`, success: false });
+    }
+  };
+
+  /**
+   * deleteUser, function to delete a particular user from the database
+   * @param req Request object
+   * @param res Response object
+   * @returns returns true if successfully, false otherwise
+   */
+  static deleteUser = async (req: Request, res: Response) => {
+    try {
+      const user = await User.findByPk(req.params.id);
+
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: "User not found!", success: false });
+      }
+
+      user.destroy();
+      res
+        .status(200)
+        .json({ message: "User deleted successfully!", success: true });
+    } catch (error: any) {
+      console.log(`Error: ${error}`);
+      res.status(500).json({ message: `Error: ${error}`, success: false });
     }
   };
 }
