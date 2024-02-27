@@ -9,7 +9,10 @@ export class DrinkController {
       res.json({ data: drinks, success: true });
     } catch (err: any) {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).json({
+        message: `Error: ${err.message}`,
+        success: false,
+      });
     }
   };
 
@@ -25,7 +28,10 @@ export class DrinkController {
       res.json({ data: drink, success: true });
     } catch (err: any) {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).json({
+        message: `Error: ${err.message}`,
+        success: false,
+      });
     }
   };
 
@@ -36,7 +42,10 @@ export class DrinkController {
       res.json({ data: drink, success: true });
     } catch (err: any) {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).json({
+        message: `Error: ${err.message}`,
+        success: false,
+      });
     }
   };
 
@@ -53,7 +62,10 @@ export class DrinkController {
       res.json(drink);
     } catch (err: any) {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).json({
+        message: `Error: ${err.message}`,
+        success: false,
+      });
     }
   };
 
@@ -70,7 +82,10 @@ export class DrinkController {
       res.json({ message: "Drink removed", success: true });
     } catch (err: any) {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).json({
+        message: `Error: ${err.message}`,
+        success: false,
+      });
     }
   };
 }
