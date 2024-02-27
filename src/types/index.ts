@@ -23,7 +23,7 @@ export interface IDrinkItem {
   quantity?: number;
 }
 
-export interface IIventoryItem {
+export interface IInventoryItem {
   name: string;
   brand: string;
   category: string;

@@ -1,47 +1,38 @@
 import * as Sequelize from "sequelize";
 
-export default function getDateQueryParam(queryParam: string) {
-  const { Op } = Sequelize;
-
+export default function calculateDates(dateParam: string): {
+  startDate: Date;
+  endDate: Date;
+} {
   const today = new Date();
-  const lastMonthStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
 
-  // Use switch statement to build query dynamically
-  const query = {
-    where: {
-      createdAt: {},
-    },
-    attributes: ["createAt"],
-  };
-
-  switch (queryParam) {
+  switch (dateParam) {
     case "last_day":
-      // Same logic as before for yesterday
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      query.where.createdAt = {
-        [Op.gte]: yesterday.toISOString(),
-        [Op.lt]: new Date().toISOString(),
+      return {
+        startDate: new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate() - 1
+        ),
+        endDate: new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate()
+        ),
       };
-      break;
     case "last_month":
-      query.where.createdAt = {
-        [Op.gte]: lastMonthStart.toISOString(),
-        [Op.lt]: today.toISOString(),
+      return {
+        startDate: new Date(today.getFullYear(), today.getMonth() - 1, 1),
+        endDate: new Date(today.getFullYear(), today.getMonth(), 0), // Last day of previous month
       };
-      break;
     case "last_year":
-      query.where.createdAt = {
-        [Op.gte]: new Date(today.getFullYear() - 1, 0, 1).toISOString(),
-        [Op.lt]: today.toISOString(),
+      return {
+        startDate: new Date(today.getFullYear() - 1, 0, 1), // First day of previous year
+        endDate: new Date(today.getFullYear() - 1, 11, 31), // Last day of previous year
       };
-      break;
     case "all_time":
-      // No need for filtering, leave query.where empty
-      break;
+      return { startDate: new Date(), endDate: new Date() }; // No need to set dates
     default:
-      throw new Error(`Invalid dateParam: ${queryParam}`);
+      throw new Error(`Invalid dateParam: ${dateParam}`);
   }
-
-  return query;
 }

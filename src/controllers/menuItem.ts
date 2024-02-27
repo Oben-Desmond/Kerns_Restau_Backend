@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import MenuItem from "../models/MenuItem.model";
-import { io } from "../../server";
+// import { io } from "../../server";
 
 export class MenuItemController {
   //get all menuItems
@@ -35,7 +35,7 @@ export class MenuItemController {
     try {
       const menuItem = await MenuItem.create(req.body);
 
-      io.emit("menuItemCreated", {});
+      //   io.emit("menuItemCreated", {});
       res.json({ data: menuItem, success: true });
     } catch (err: any) {
       console.error(err.message);
