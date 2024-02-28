@@ -3,6 +3,7 @@ import calculateDates from "../utils/functions/getDateQueryParams";
 import RentalItem from "../models/Rental.model";
 import RentalOrder from "../models/RentalOrder.model";
 import { Op } from "sequelize";
+import * as Sequelize from "sequelize";
 
 export class RentalStatsController {
   static getAllRentalItem = async (req: Request, res: Response) => {
@@ -166,6 +167,58 @@ export class RentalStatsController {
       res
         .status(500)
         .json({ message: "Error fetching rental income", success: false });
+    }
+  }
+
+  static async getRentalIncomeForGraph(req: Request, res: Response) {
+    try {
+      const { date: dateParam } = req.params;
+
+      // Handle date parameters based on the provided value
+      const { startDate, endDate } = dateParam
+        ? calculateDates(dateParam)
+        : { startDate: new Date(), endDate: new Date() };
+
+      // Fetch and group rental orders (filtered by date and finance_status)
+      const query = {
+        where: {
+          ...(dateParam && {
+            // Include date filter if dateParam exists
+            createdAt: {
+              [Op.gte]: startDate,
+              [Op.lt]: endDate,
+            },
+          }),
+          finance_status: "paid",
+        },
+        attributes: [
+          [
+            Sequelize.fn("DATE_TRUNC", "hour", Sequelize.col("updatedAt")),
+            "hour",
+          ], // Extract hour from updatedAt
+          [Sequelize.fn("SUM", Sequelize.col("totalPrice")), "total_amount"], // Sum totalPrice for each hour
+        ],
+        group: ["hour"], // Group by hour
+        raw: true, // Use raw result objects
+      };
+
+      const incomeData = await RentalOrder.findAll(query);
+
+      // Prepare and return the response
+      const response = {
+        data: incomeData, // Response data already formatted as expected
+        succes: true,
+      };
+
+      res.json(response);
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .json({
+          message: "Error fetching rental income for graph",
+          success: false,
+        });
     }
   }
 }

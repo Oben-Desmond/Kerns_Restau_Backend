@@ -49,6 +49,12 @@ router.get(
   RentalStatsController.getRentalItemOutOfStock
 );
 
+/** Get rental total income graph */
+router.get(
+  "/rental-total-income-graph",
+  RentalStatsController.getRentalIncomeForGraph
+);
+
 /**
  * Kitchen service stats router
  *
@@ -95,6 +101,12 @@ router.get(
 router.get(
   "/restaurant-order-available-menu-items",
   RestaurantStatsController.getNumberOfAvailableMenuItems
+);
+
+/** Get total order income graph */
+router.get(
+  "/restaurant-total-order-income-graph",
+  RestaurantStatsController.getRestaurantDateIncome
 );
 
 export default router;
