@@ -73,6 +73,46 @@ export class InventoryStatsController {
     }
   };
 
+  static getTotalOutOfStockItem = async (req: Request, res: Response) => {
+    const { date: dateParam } = req.params;
+
+    try {
+      const { startDate, endDate } = dateParam
+        ? calculateDates(dateParam)
+        : { startDate: new Date(), endDate: new Date() };
+
+      const query = {
+        where: dateParam
+          ? {
+              createdAt: {
+                [Op.gte]: startDate,
+                [Op.lt]: endDate,
+              },
+            }
+          : {},
+      };
+
+      const inventoryData = await InventoryItem.find(query);
+
+      const lowStockItemCount = inventoryData.filter(
+        (item: IInventoryItem) => (item.quantity = 0)
+      ).length;
+
+      res.json({
+        data: {
+          total_low_stock_count: lowStockItemCount,
+        },
+        success: true,
+      });
+    } catch (error: any) {
+      console.log(`Error: ${error}`);
+      res.status(500).json({
+        message: `Error: ${error}`,
+        success: false,
+      });
+    }
+  };
+
   static getTotalPurchaseOrder = async (req: Request, res: Response) => {
     try {
       /** state management */
