@@ -7,7 +7,7 @@ export default function calculateDates(dateParam: string): {
   const today = new Date();
 
   switch (dateParam) {
-    case "last_day":
+    case "yesterday":
       return {
         startDate: new Date(
           today.getFullYear(),

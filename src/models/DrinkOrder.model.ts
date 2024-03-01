@@ -31,6 +31,8 @@ const DrinkOrder = sequelize.define("DrinkOrder", {
   },
 });
 
-sequelize.sync();
+sequelize.sync({
+  alter: true,
+});
 
 export default DrinkOrder;

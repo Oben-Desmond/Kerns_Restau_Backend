@@ -38,7 +38,7 @@ router.get(
 router.get("/rental-items", RentalStatsController.getAllRentalItem);
 
 /** Get rental total income */
-router.get("/rental-total-icome", RentalStatsController.getRentalIncome);
+router.get("/rental-total-income", RentalStatsController.getRentalIncome);
 
 /** Get Total rental orders */
 router.get("/rental-total-orders", RentalStatsController.getTotalRentalOrders);

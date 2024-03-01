@@ -80,9 +80,10 @@ export class RentalStatsController {
         data: {
           total: totalIncome,
         },
+        success: true,
       };
 
-      res.json({ response, success: true });
+      res.json(response);
     } catch (error) {
       console.error(error);
       res
@@ -159,9 +160,10 @@ export class RentalStatsController {
         data: {
           total: rentalItems,
         },
+        success: true,
       };
 
-      res.json({ response, success: true });
+      res.json(response);
     } catch (error) {
       console.error(error);
       res
@@ -213,12 +215,10 @@ export class RentalStatsController {
       res.json(response);
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .json({
-          message: "Error fetching rental income for graph",
-          success: false,
-        });
+      res.status(500).json({
+        message: "Error fetching rental income for graph",
+        success: false,
+      });
     }
   }
 }

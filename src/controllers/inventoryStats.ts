@@ -50,7 +50,7 @@ export class InventoryStatsController {
           : {},
       };
 
-      const inventoryData = await InventoryItem.find(query);
+      const inventoryData = await InventoryItem.findAll(query);
 
       const lowStockItemCount = inventoryData.filter(
         (item: IInventoryItem) =>
@@ -162,18 +162,19 @@ export class InventoryStatsController {
       // Calculate inventory stock levels (using readability approach)
       const totalStock = inventoryData.length;
       const highLevelStock = inventoryData.filter(
-        (item: any) => item.quantity >= item.upperBound
+        (item: any) => item.quantity >= item.upper_quantity_bound
       ).length;
 
       const levelStock = inventoryData.filter(
         (item: any) =>
-          item.quantity > Math.floor(item.upperBound / 2) &&
-          item.quantity < item.upperBound
+          item.quantity > Math.floor(item.upper_quantity_bound / 2) &&
+          item.quantity < item.upper_quantity_bound
       ).length;
 
       const lowLevelStock = inventoryData.filter(
         (item: any) =>
-          item.quantity > 0 && item.quantity <= Math.floor(item.upperBound / 2)
+          item.quantity > 0 &&
+          item.quantity <= Math.floor(item.upper_quantity_bound / 2)
       ).length;
       const outOfStock = inventoryData.filter(
         (item: any) => item.quantity === 0
