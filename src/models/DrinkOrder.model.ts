@@ -1,18 +1,14 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
 
-const RentalOrder = sequelize.define("RentalOrder", {
+const DrinkOrder = sequelize.define("DrinkOrder", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
-  customer_name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  customer_id_number: {
+  table_no: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -20,7 +16,7 @@ const RentalOrder = sequelize.define("RentalOrder", {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  rental_status: {
+  kitchen_status: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -28,15 +24,7 @@ const RentalOrder = sequelize.define("RentalOrder", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  rental_date: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  return_date: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  rental_items: {
+  drink_items: {
     type: DataTypes.ARRAY(DataTypes.JSONB), // Use JSONB for efficiency
     allowNull: false,
     default: [],
@@ -47,4 +35,4 @@ sequelize.sync({
   alter: true,
 });
 
-export default RentalOrder;
+export default DrinkOrder;

@@ -23,7 +23,7 @@ export interface IDrinkItem {
   quantity?: number;
 }
 
-export interface IIventoryItem {
+export interface IInventoryItem {
   name: string;
   brand: string;
   category: string;
@@ -87,7 +87,8 @@ export interface IRentalItem {
 export interface IRentalOrder {
   id: number;
   customer_name: string;
-  customer_id: number;
+  customer_id_number: number;
+  rental_agreement: string;
   total: number;
   rental_status: "still out" | "returned";
   finance_status: "paid" | "pending";
@@ -114,4 +115,15 @@ export interface IUserLogTable {
   description: string;
   category: "auth" | "mutation";
   user: IUser;
+}
+
+interface INotification {
+  id: string;
+  source: string;
+  destination: string;
+  message: string;
+  type: "order" | "menu" | "rental";
+  type_id: string;
+  titles: string;
+  is_read: string[];
 }

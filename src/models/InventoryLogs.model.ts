@@ -1,29 +1,29 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
 
-const UserLog = sequelize.define("UserLog", {
-  id: {
-    type: DataTypes.INTEGER,
+const InventoryItemLogs = sequelize.define("InventoryItemLogs", {
+  name: {
+    type: DataTypes.STRING,
     allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
   },
   description: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  category: {
-    type: DataTypes.STRING,
+  id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
   },
-  user: {
+  item: {
     type: DataTypes.JSON,
     allowNull: false,
   },
 });
 
-UserLog.sync({
+InventoryItemLogs.sync({
   alter: true,
 });
 
-export default UserLog;
+export default InventoryItemLogs;

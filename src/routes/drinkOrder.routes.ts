@@ -1,6 +1,6 @@
 import express from "express";
-import { OrdersController } from "../controllers/orders";
 import { restrictToRole } from "../services/authMiddleWare.service";
+import { DrinkOrdersController } from "../controllers/drinkOrder";
 
 const router = express.Router();
 
@@ -8,35 +8,35 @@ const router = express.Router();
 router.get(
   "/",
   restrictToRole(["admin", "waiter", "kitchen", "finance"]),
-  OrdersController.getOrders
+  DrinkOrdersController.getDrinkOrders
 );
 
 //get order by id
 router.get(
   "/:id",
   restrictToRole(["admin", "waiter", "kitchen", "finance"]),
-  OrdersController.getOrderById
+  DrinkOrdersController.getDrinkOrderById
 );
 
 //create order
 router.post(
   "/",
   restrictToRole(["admin", "waiter", "kitchen", "finance"]),
-  OrdersController.createOrder
+  DrinkOrdersController.createDrinkOrder
 );
 
 //update order
 router.put(
   "/:id",
   restrictToRole(["admin", "waiter", "kitchen", "finance"]),
-  OrdersController.updateOrder
+  DrinkOrdersController.updateDrinkOrder
 );
 
 //delete order
 router.delete(
   "/:id",
   restrictToRole(["admin", "waiter", "kitchen", "finance"]),
-  OrdersController.deleteOrder
+  DrinkOrdersController.deleteDrinkOrder
 );
 
 export default router;

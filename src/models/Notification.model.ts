@@ -1,45 +1,45 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
 
-const User = sequelize.define("User", {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  phone_number: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  last_login: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  role: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
+const Notification = sequelize.define("Notification", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    autoIncrement: true,
     primaryKey: true,
+    autoIncrement: true,
   },
-  status: {
+  source: {
     type: DataTypes.STRING,
+    allowNull: false,
+  },
+  destination: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  message: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  notification_type: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  type_id_number: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  is_read: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false,
   },
 });
 
-User.sync({
+Notification.sync({
   alter: true,
 });
 
-export default User;
+export default Notification;

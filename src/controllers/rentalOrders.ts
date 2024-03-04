@@ -56,7 +56,10 @@ export class RentalOrdersController {
       });
     } catch (error: any) {
       console.log(error.message);
-      res.status(500).send("Server error: " + error.message);
+      res.status(500).json({
+        message: "Server error: " + error.message,
+        success: false,
+      });
     }
   };
 
@@ -64,10 +67,13 @@ export class RentalOrdersController {
   static createRentalOrder = async (req: Request, res: Response) => {
     try {
       const rentalOrder = await RentalOrder.create(req.body);
-      res.send({ data: rentalOrder, success: true });
+      res.json({ data: rentalOrder, success: true });
     } catch (err: any) {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).json({
+        message: `Server Error: ${err.message}`,
+        success: false,
+      });
     }
   };
 
